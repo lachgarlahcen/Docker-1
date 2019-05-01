@@ -1,0 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    dockerfile                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: llachgar <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2018/12/24 21:35:16 by llachgar          #+#    #+#              #
+#    Updated: 2018/12/24 21:35:20 by llachgar         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+FROM ubuntu
+
+MAINTAINER llachgar <lachgarlahcen@hotmail.com>
+
+RUN apt-get -y  update && apt-get -y upgrade &&\
+	apt-get install -y wget default-jre
+
+WORKDIR minecraft
+
+RUN wget -O minecraft_server.jar https://s3.amazonaws.com/Minecraft.Download/versions/1.7.4/minecraft_server.1.7.4.jar
+
+EXPOSE 25565
+
+ENTRYPOINT java -Xmx1024M -Xms1024M -jar minecraft_server.jar nogui

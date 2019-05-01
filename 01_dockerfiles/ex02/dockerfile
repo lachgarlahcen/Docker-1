@@ -1,0 +1,15 @@
+FROM ruby
+
+RUN apt-get -y update && apt-get -y  upgrade && \
+	apt-get install  build-essential && gem install bundler && \
+	mkdir app
+
+WORKDIR ./app
+
+COPY ./app .
+
+RUN bundle install && \ 
+	rake db:migrate && \
+	rake db:setup && \
+	rake db:seed
+

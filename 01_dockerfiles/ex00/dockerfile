@@ -1,0 +1,7 @@
+FROM alpine
+
+MAINTAINER llachgar <llachgar@student.1337.ma>
+
+RUN apk update && apk upgrade && apk add  vim  
+
+ENTRYPOINT vim

@@ -1,0 +1,16 @@
+FROM ubuntu
+
+MAINTAINER llachgar <lachgarlahcen@hotmail.com>
+
+RUN apt-get -y update && apt-get -y upgrade && \
+	apt-get -y  install ca-certificates curl openssh-server postfix
+
+
+RUN curl -LO https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh && \
+	chmod 777 script.deb.sh && bash script.deb.sh && \
+	apt-get install gitlab-ce && \
+	apt install -y tzdata
+
+EXPOSE 80 443 22 
+
+ENTRYPOINT (/opt/gitlab/embedded/bin/runsvdir-start &) && gitlab-ctl reconfigure && tail -f /dev/null

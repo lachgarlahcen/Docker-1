@@ -1,0 +1,20 @@
+FROM ubuntu
+
+MAINTAINER llachgar <lachgarlahcen@hotmail.com>
+
+RUN apt-get -y update && apt-get -y upgrade && \
+	apt-get install -y python3 && \
+	apt-get install -y python3-pip && \
+	pip3 install django
+
+EXPOSE 8000
+
+
+WORKDIR ./app
+
+COPY ./app .
+
+CMD pip3 install -r requirements.txt && \
+	python3 manage.py makemigrations && \
+	python3 manage.py migrate && \
+	python3 manage.py runserver 0.0.0.0:8000

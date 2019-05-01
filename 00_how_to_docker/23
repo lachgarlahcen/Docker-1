@@ -1,0 +1,2 @@
+docker-machine ssh Char
+docker network create -d overlay overmind

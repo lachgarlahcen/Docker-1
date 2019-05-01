@@ -1,0 +1,26 @@
+FROM ubuntu
+
+MAINTAINER llachgar <klachgarlahcen@hotmail.com>
+
+EXPOSE 80 443
+
+#to coppy the web app from 
+#COPY /html  /var/www/
+#
+ENV SERVER_NAME=localhost
+
+RUN apt-get -y update && apt-get -y upgrade && \
+	apt-get install -y  apache2 && apt-get install -y php
+
+WORKDIR /var/www
+RUN rm -rf index.html
+
+COPY ./wesite .
+
+ENV APACHE_RUN_USER www-data
+ENV APACHE_RUN_GROUP www-data
+ENV APACHE_LOG_DIR /var/log/apache2
+ENV APACHE_RUN_DIR /var/www/html
+ENV APACHE_PID_FILE /var/run/apache2.pid
+
+CMD apachectl -D FOREGROUND

@@ -1,0 +1,4 @@
+apt update && apt upgrade
+apt install gcc
+apt install vim
+apt install git

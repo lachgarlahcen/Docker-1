@@ -1,0 +1,11 @@
+FROM ubuntu
+
+MAINTAINER llachgar <lachgarlahcen@hgotmail.com>
+
+RUN  apt-get -y update && apt-get -y upgrade && \
+			apt-get install -y nginx && apt-get install -y curl && \
+			apt-get install -y vim
+
+EXPOSE 80 443
+
+CMD nginx -g 'daemon off;'
